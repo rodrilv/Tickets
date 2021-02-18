@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>tab4</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="1">
+      <ion-label class="font">En Espera</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      <ion-label class="font">En Curso</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="3">
+      <ion-label class="font">Completados</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-card *ngFor="let tckt of ticketService.ticket" id="card">
+    <ion-item>
+      <ion-icon *ngIf="tckt.issue == 'Wi-Fi'" name="wifi-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Impresora'" name="print-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Correo'" name="mail-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Otro'" name="chatbubble-ellipses-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Software Multiplataforma'" name="layers-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Aplicacion Web'" name="layers-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Pagina Web'" name="newspaper-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Redes'" name="globe-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="tckt.issue == 'Camaras de Seguridad'" name="videocam-outline" slot="start"></ion-icon>
+      <ion-label>{{tckt.issue}}</ion-label>
+      <ion-button *ngIf="tckt.status == 'En Espera'" fill="outline" slot="end" (click)="ticket_proc()">Take</ion-button>
+      <ion-button *ngIf="tckt.status == 'Completado'" fill="outline" slot="end" (click)="ticket_det()">Ver</ion-button>
+    </ion-item>
+    <ion-card-content>
+      <h2>{{tckt.explicacion}}</h2>
+      <p><b><i>{{tckt.sub_issue}}</i></b></p>
+      <p><b>{{tckt.status}}</b></p>
+      <p><b>Llegó: &nbsp;</b><i>{{tckt.fecha}}</i></p>
+      <p><b>Pedido por: &nbsp;</b>{{tckt.nombre_cliente}}</p>
+      <p><b>Teléfono: &nbsp;</b>{{tckt.telefono}}</p>
+      <p *ngIf="tckt.status == 'En Curso'"><b>Tomado por: &nbsp;</b><i>{{tckt.agente}}</i></p>
+      <p *ngIf="tckt.status == 'Completado'"><b>Finalizado por: &nbsp;</b><i>{{tckt.agente}}</i></p>
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Atrás" defaultHref="/"></ion-back-button>
+    </ion-buttons> 
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #forma="ngForm">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input name="nombre" required [(ngModel)]="user.nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido Paterno</ion-label>
+      <ion-input name="apellido_p" required [(ngModel)]="user.apellido_paterno"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido Materno</ion-label>
+      <ion-input name="apellido_m" required [(ngModel)]="user.apellido_materno"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo_electronico" required [(ngModel)]="user.correo_electronico"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">¿Dónde te ubicas?</ion-label>
+      <ion-input name="ubicacion" required [(ngModel)]="user.ubicacion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Empresa</ion-label>
+      <ion-input name="empresa" required [(ngModel)]="user.empresa"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Numero de Telefono</ion-label>
+      <ion-input name="telefono" type="number" required [(ngModel)]="user.telefono"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-button fill="clear" color="danger" (click)="presentPopover()">Acerca de las contraseñas...</ion-button>
+  </ion-item>
+    <ion-button expand="full" class="register-button" [disabled]="!forma.valid" (click)="register()">Solicitar Cuenta</ion-button>
+  </form>
+</ion-content>

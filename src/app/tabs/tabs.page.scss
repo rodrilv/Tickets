@@ -1,1 +1,39 @@
+.menu-logo{
+    position: relative;
+    left: 32%;
+    filter: grayscale(100%);
+    width: 100px;
+    height: 90px;
 
+}
+.text{
+    position: relative; 
+    left: 2%;
+}
+
+.refresh{
+    position: relative; 
+    right: 10%;
+    
+}
+.refresh:hover{
+    color:#03b6fc;
+}
+.img1{
+    position: relative;
+    left: 35%;
+}
+.img2{
+    position: relative;
+    left: 35%;
+}
+.divtext2{
+    position: relative;
+    left: 35%;
+    width: 200px;
+}
+.divtext1{
+    position: relative;
+    left: 35%;
+    width: 200px;
+}

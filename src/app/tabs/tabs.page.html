@@ -1,20 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" (click)="openFirst()"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Dashboard
+    </ion-title>
+    <ion-icon *ngIf="loginService.datos[0]" button (click)="getTicket()" class="refresh" slot="end"
+      name="reload-outline" size="large"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-menu side="start" menuId="first" contentId="main" autoHide="true">
+  <ion-toolbar>
+    <ion-title>Menú</ion-title>
+  </ion-toolbar>
+  <ion-content>
+    <ion-list>
+      <ion-item *ngIf="this.loginService.datos[0]['id_agente'] || loginService.datos[0]['administrador']" button >
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-label>Buscar Cliente</ion-label>
+      </ion-item>
+      <ion-item button>
+        <ion-icon slot="start" name="power-outline"></ion-icon>
+        <ion-label (click)=logOut()>Cerrar Sesión</ion-label>
+      </ion-item>
+      <ion-item button tab="tab3">
+        <ion-icon slot="start" name="settings-outline"></ion-icon>
+        <ion-label (click)="toSettings()">Ajustes</ion-label>
+      </ion-item>
+      <img slot="end" class="menu-logo" src="../../assets/dex-tree.png">
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet id="main"></ion-router-outlet>
+<ion-content>
+  <div>
+    <h4 id="grt" class="text">¡Tienes que Iniciar Sesión!</h4>
+  </div>
+  <div *ngIf="loginService.datos">
+    <img class="img1" src="../../assets/ticket_info.png">
+    <div class="divtext1">
+      <h6>Aquí podrás ver los tickets que haz realizado</h6>
+    </div>
+    <img class="img2" src="../../assets/ticket_info_2.png">
+    <div class="divtext2">
+      <h6>Aquí podrás levantar un nuevo ticket</h6>
+    </div>
+  </div>
+</ion-content>
 <ion-tabs>
-
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
+    <ion-tab-button tab="tab1" *ngIf="loginService.datos[0]['cliente']">
       <ion-icon name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
+      <ion-label>Tus Tickets</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab2">
-      <ion-icon name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
+      <ion-icon name="receipt-outline"></ion-icon>
+      <ion-label>Levantar Ticket</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+    <ion-tab-button tab="tab4" *ngIf="loginService.datos[0]['agente']">
+      <ion-icon name="alert-outline"></ion-icon>
+      <ion-label>Tickets Entrantes</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab5" *ngIf="loginService.datos[0]['administrador']">
+      <ion-icon name="person-add-outline"></ion-icon>
+      <ion-label>Usuarios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab4" *ngIf="loginService.datos[0]['administrador']">
+      <ion-icon name="alert-outline"></ion-icon>
+      <ion-label></ion-label>
     </ion-tab-button>
   </ion-tab-bar>
-
 </ion-tabs>

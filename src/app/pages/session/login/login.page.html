@@ -1,0 +1,55 @@
+<!--<div id="test">Hello</div>-->
+<div class="logo animated fadeIn fast">
+  <img src="../../../../assets/dextree-logo-02.png">
+</div>
+<ion-content>
+  <div class="formu">
+    <form #in="ngForm">
+      <ion-item>
+        <ion-label>
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-label>
+        <ion-input placeholder="Correo" name="correo" id="correo" required [(ngModel)]="user.correo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-icon name="key-outline"></ion-icon>
+        </ion-label>
+        <ion-input placeholder="Contraseña" type="password" name="password" id="password" required
+          [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+    </form>
+    <ion-item>
+      <ion-checkbox checked="true" slot="start" color="primary" [(ngModel)]="checked"></ion-checkbox>
+      <ion-label>Recordar Usuario</ion-label>
+    </ion-item>
+  </div>
+  <div class="login-button">
+    <button (click)="login()" [disabled]="!in.valid" class="btn btn-primary">Iniciar Sesión</button>
+  </div>
+
+  <small class="form-text text-muted small-text">¿No eres usuario?</small>
+  <a routerLink="/register" routerLinkActive="active">
+    <ion-button class="register-button" fill="clear">Registrarse </ion-button>
+  </a>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab">
+    <ion-fab-button>
+      <ion-icon name="arrow-back-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button>
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button href="https://www.facebook.com/pg/DexTreeSolutions/about/?ref=page_internal">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

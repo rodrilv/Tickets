@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { UserInfoComponent } from '../components/users/user-info/user-info.component'
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private modal: ModalController) {}
 
-}
+    async settings() {
+      const modal = await this.modal.create({
+        component: UserInfoComponent
+      });
+      return await modal.present();
+    }
+  }

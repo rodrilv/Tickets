@@ -1,17 +1,86 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  <ion-toolbar></ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content>
+  <ion-item>
+    <ion-title>
+    <h6>Básico</h6>
+    </ion-title>
+  </ion-item>
+  <ion-list>
+        <ion-item button (click)="wifi()">
+          <ion-icon slot="start" name="wifi-outline"></ion-icon>
+          <ion-label>
+            <h3>Wi-Fi</h3>
+          </ion-label>
+          <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item button (click)="printer()"> 
+          <ion-icon slot="start" name="print-outline"></ion-icon>
+          <ion-label>
+            <h3>Impresora</h3>
+          </ion-label>
+          <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item button (click)="email()">
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-label>
+            <h3>Correo</h3>
+          </ion-label>
+          <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item button (click)="others()">
+          <ion-icon slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+          <ion-label>
+            <h3>Otros</h3>
+          </ion-label>
+          <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-title>
+           <h6>Desarrollo</h6>
+          </ion-title>
+        </ion-item>
+        <ion-item button (click)="software()">
+          <ion-icon slot="start" name="layers-outline"></ion-icon>       
+             <ion-label>
+            <h3>Software Multiplataforma</h3>
+          </ion-label>
+          <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item button (click)="applications()">
+          <ion-icon slot="start" name="laptop-outline"></ion-icon>         
+           <ion-label>
+            <h3>Aplicaciones Web</h3>
+          </ion-label>
+          <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item button (click)="pages()">
+          <ion-icon slot="start" name="newspaper-outline"></ion-icon>          
+          <ion-label>
+            <h3>Páginas Web</h3>
+          </ion-label>
+          <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-title>
+            <h6>Infraestructura</h6>
+          </ion-title>
+          </ion-item>
+          <ion-item button (click)="network()">
+            <ion-icon slot="start" name="globe-outline"></ion-icon>          
+            <ion-label>
+              <h3>Redes</h3>
+            </ion-label>
+            <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+          </ion-item>
+          <ion-item button (click)="surveillance()">
+            <ion-icon slot="start" name="videocam-outline"></ion-icon>          
+            <ion-label>
+              <h3>Cámaras de Seguridad</h3>
+            </ion-label>
+            <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+          </ion-item>
+    </ion-list>
 </ion-content>

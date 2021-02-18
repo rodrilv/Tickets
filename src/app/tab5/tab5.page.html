@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-title>
+      <h6>Clientes</h6>
+      </ion-title>
+    </ion-item>
+    <ion-item button (click)="incoming()">
+      <ion-icon slot="start" name="person-add-outline"></ion-icon>
+      <ion-label>
+        <h3>Clientes Entrantes</h3>
+      </ion-label>
+      <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="approved()"> 
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-label>
+        <h3>Clientes Vigentes</h3>
+      </ion-label>
+      <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="na()">
+      <ion-icon slot="start" name="person-remove-outline"></ion-icon>
+      <ion-label>
+        <h3>Clientes dados de baja</h3>
+      </ion-label>
+      <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-title>
+      <h6>Agentes</h6>
+      </ion-title>
+    </ion-item>
+    <ion-item button (click)="register_agents()">
+      <ion-icon slot="start" name="person-add-outline"></ion-icon>
+      <ion-label>
+        <h3> Registrar Agentes</h3>
+      </ion-label>
+      <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="active_agents()">
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-label>
+        <h3>Agentes activos</h3>
+      </ion-label>
+      <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="na_agents()">
+      <ion-icon slot="start" name="person-remove-outline"></ion-icon>
+      <ion-label>
+        <h3> Agentes dados de Baja</h3>
+      </ion-label>
+      <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-title>
+      <h6>Administradores</h6>
+      </ion-title>
+      <ion-item button (click)="na()">
+        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+        <ion-label>
+          <h3> Administradores Activos</h3>
+        </ion-label>
+        <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="na()">
+        <ion-icon slot="start" name="person-add-outline"></ion-icon>
+        <ion-label>
+          <h3> Registrar Administrador</h3>
+        </ion-label>
+        <ion-icon class="chvron" slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+
+    </ion-list>
+</ion-content>
