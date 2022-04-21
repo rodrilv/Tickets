@@ -12,11 +12,11 @@ import { PopoverComponent } from '../../../components/ticket_menu/popover/popove
 export class RegisterPage implements OnInit {
   user = {
     nombre: null,
-    apellido_paterno: null,
-    apellido_materno: null,
-    correo_electronico: null,
-    ubicacion: null,
+    apellido_p: null,
+    apellido_m: null,
     empresa: null,
+    ubicacion: null,
+    correo: null,
     telefono: null,
     password: null
   }

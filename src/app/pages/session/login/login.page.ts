@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
     } else {
       this.user.correo = window.localStorage.getItem('correo');
       this.user.password = window.localStorage.getItem('pass');
+      this.loginService.login(this.user.correo, this.user.password);
       //document.getElementById('correo').value = window.localStorage.getItem('correo');
       //document.getElementById('password').value = window.localStorage.getItem('pass');
       //document.in.correo.value = window.localStorage.getItem('correo');
