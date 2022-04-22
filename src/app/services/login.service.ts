@@ -17,51 +17,33 @@ export class LoginService {
     private router: Router,
     private loadingController: LoadingController
   ) {
-    this.datos = [];
+    this.datos = null;
   }
 
   ngOnInit() {}
 
   async login(correo: string, password: string) {
     this.presentLoading();
+
     const { data, error } = await supabase
       .from("cliente")
       .select()
       .match({ correo: correo, password: password });
+    console.log(data);
 
-    if (!error) {
-      this.userConditions(data);
-    } else {
+    if (data.length === 0) {
       Swal.fire({
         icon: "error",
-        title: "Hubo un error",
-        text: `Se desconoce la causa, ponte en contacto con soporte`,
+        title:"Hubo un error",
+        text: "Verifica los datos introducidos",
+        toast: true,
       });
-    }
-
-    this.dismissLoading();
-  }
-
-  userConditions(data: any) {
-    if (!data) {
-      Swal.fire({
-        icon: "error",
-        title: "Hubo un error",
-        text: `Puede que el usuario introducido no exista`,
-      });
-    } else if (data[0].verified === false) {
-      Swal.fire({
-        icon: "warning",
-        title: "Hubo un error",
-        text: `Puede que tu cuenta aún no haya sido verificada...`,
-      });
+      this.dismissLoading();
     } else {
-      Swal.fire({
-        icon: "success",
-        title: "Bienvenido",
-        text: `El inicio de sesión ha sido exitoso`,
-      });
+      this.datos = data;
+      this.status = true;
       this.router.navigate(["dashboard"]);
+      this.dismissLoading();
     }
   }
 

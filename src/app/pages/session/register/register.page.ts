@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
     ubicacion: null,
     correo: null,
     telefono: null,
-    password: null
+    password: null,
   }
   constructor(
     private registerService: RegisterService,

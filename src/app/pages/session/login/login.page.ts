@@ -20,23 +20,21 @@ export class LoginPage implements OnInit {
     private platform: Platform,
     private router: Router,
     private loginService: LoginService) { }
-  ngOnInit() {
+
+  async ngOnInit() {
     if (window.localStorage.getItem('pass') == null && window.localStorage.getItem('correo') == null) {
       console.log("vacio");
     } else {
       this.user.correo = window.localStorage.getItem('correo');
       this.user.password = window.localStorage.getItem('pass');
-      this.loginService.login(this.user.correo, this.user.password);
-      //document.getElementById('correo').value = window.localStorage.getItem('correo');
-      //document.getElementById('password').value = window.localStorage.getItem('pass');
-      //document.in.correo.value = window.localStorage.getItem('correo');
-      //document.in.password.value = window.localStorage.getItem('pass');
-      //this.loginService.login(window.localStorage.getItem('correo'), window.localStorage.getItem('pass'));
+      await this.loginService.login(this.user.correo, this.user.password);
+      
+      
+      
     }
   }
   login() {
     this.loginService.login(this.user.correo, this.user.password);
-    this.loginService.status = true;
     if (this.checked) {
       window.localStorage.setItem('correo', this.user.correo);
       window.localStorage.setItem('pass', this.user.password);
