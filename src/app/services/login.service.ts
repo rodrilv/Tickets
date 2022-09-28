@@ -1,49 +1,50 @@
-import { Injectable, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { supabase } from "./config/supabase";
-import { Router } from "@angular/router";
-import { LoadingController } from "@ionic/angular";
-import Swal from "sweetalert2";
-
 @Injectable({
   providedIn: "root",
 })
 export class LoginService {
   datos: any;
-  loading = false;
   status: any;
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private loadingController: LoadingController
-  ) {
+  constructor() {
     this.datos = null;
   }
-
-  ngOnInit() {}
-
-  async login(correo: string, password: string) {
-    this.presentLoading();
-
+  async checkIfUser(correo: string, password: string){
     const { data, error } = await supabase
-      .from("cliente")
-      .select()
-      .match({ correo: correo, password: password });
-    console.log(data);
+    .from('usuarios')
+    .select('*')
+    .match( {correo: correo, password: password} );
 
-    if (data.length === 0) {
-      Swal.fire({
-        icon: "error",
-        title:"Hubo un error",
-        text: "Verifica los datos introducidos",
-        toast: true,
-      });
-      this.dismissLoading();
-    } else {
+    if(data.length === 0){
+      return false;
+    }else{
       this.datos = data;
+      return true;
+    }
+  }
+
+  async checkIfClient(correo: string, password: string){
+    const { data, error } = await supabase
+    .from('usuarios')
+    .select('*')
+    .match( {correo: correo, password: password} );
+    //console.log(!data);
+    if(data.length === 0){
+      return false;
+    }else{
+      this.datos = data;
+      return true;
+    }
+  }
+  async login(correo: string, password: string){
+    if(await this.checkIfClient(correo, password)){
       this.status = true;
-      this.router.navigate(["dashboard"]);
-      this.dismissLoading();
+      return true;
+    }else if(await this.checkIfUser(correo, password)){
+      this.status = true;
+      return true;
+    }else{
+      return false;
     }
   }
 
@@ -103,28 +104,4 @@ export class LoginService {
     },
       error => console.log("Hubo un error inesperado\n ¿Tal vez conexión de internet?"));
   }*/
-
-  async presentLoading() {
-    this.loading = true;
-    return await this.loadingController
-      .create({
-        cssClass: "my-custom-class",
-        message: "Iniciando Sesión",
-      })
-      .then((a) => {
-        a.present().then(() => {
-          if (!this.loading) {
-            a.dismiss();
-          }
-        });
-      });
-  }
-
-  async dismissLoading() {
-    if (this.loading) {
-      this.loading = false;
-      return await this.loadingController.dismiss();
-    }
-    return null;
-  }
 }

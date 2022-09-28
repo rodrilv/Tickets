@@ -1,6 +1,6 @@
 <!--<div id="test">Hello</div>-->
-<div class="logo animated fadeIn fast">
-  <img src="../../../../assets/dextree-logo-02.png">
+<div class="logo">
+  <img width="150" height="150" src="../../../../assets/companyLogo.png" />
 </div>
 <ion-content>
   <div class="formu">
@@ -9,14 +9,14 @@
         <ion-label>
           <ion-icon name="person-outline"></ion-icon>
         </ion-label>
-        <ion-input placeholder="Correo" name="correo" id="correo" required [(ngModel)]="user.correo"></ion-input>
+        <ion-input placeholder="Correo" name="correo" id="correo" required [(ngModel)]="this.user.correo"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>
           <ion-icon name="key-outline"></ion-icon>
         </ion-label>
         <ion-input placeholder="Contraseña" type="password" name="password" id="password" required
-          [(ngModel)]="user.password"></ion-input>
+          [(ngModel)]="this.user.password"></ion-input>
       </ion-item>
     </form>
     <ion-item>
@@ -24,14 +24,16 @@
       <ion-label>Recordar Usuario</ion-label>
     </ion-item>
   </div>
-  <div class="login-button">
-    <button (click)="login()" [disabled]="!in.valid" class="btn btn-primary">Iniciar Sesión</button>
+  
+  <div class="formu-2">
+    <button (click)="login()" [disabled]="!in.valid" class="btn btn-primary">
+      Iniciar Sesión
+    </button>
+    <small class="form-text text-muted small-text">¿No eres usuario?</small>
+    <a routerLink="/register" routerLinkActive="active">
+      <ion-button class="register-button" fill="clear">Registrarse </ion-button>
+    </a>
   </div>
-
-  <small class="form-text text-muted small-text">¿No eres usuario?</small>
-  <a routerLink="/register" routerLinkActive="active">
-    <ion-button class="register-button" fill="clear">Registrarse </ion-button>
-  </a>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab">
     <ion-fab-button>

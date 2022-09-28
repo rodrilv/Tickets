@@ -1,149 +1,44 @@
-.muted1{
-    position: relative;
-    bottom: 85px;
-    left: 18%;
+
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.muted2{
-    position: relative;
-    bottom: 107px;
-    left: 50%;
+.formu {
+  display: flex;
+  flex-direction: column;
+  width: 59%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.logo{
-    position: relative;
-    //right: 90%;
+.formu-2{
+    display: flex;
+    width: 59%;
+    margin-top: 9px;
+    flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-}
-
-.login-button{
-    position: relative;
-    top: 15px;
-    left: 34%;
-}
-.small-text{
-    position: relative;
-    top: 25px;
-    left: 37%;
-}
-.register-button{
-    position: relative;
-    top: 25px;
-    left: 32%;
-}
-.social_media{
-    position: fixed;
-}
-@media screen and (min-width: 320px){ //Pantallas pequeñas iPhone SE
-    .logo{
-        position: relative;
-        left: 0%;
-        width: 100%;
+    small{
+        display: flex;
+        flex-direction: column;
         margin-left: auto;
         margin-right: auto;
     }
-    .login-button{
-        position: relative;
-        top: 15px;
-        left: 32%;
-    }
-    .register-button{
-        position: relative;
-        top: 25px;
-        left: 31%;
-}
-    }
-    .small-text{
-        position: relative;
-        top: 25px;
-        left: 35%;
-    }
-    .fab{
-        visibility: hidden;
-    }
-    @media screen and (min-height: 410px){
-        .fab{
-            visibility: visible;
-        }
-    }
-
-@media screen and (min-width: 360px){ //Pantallas Comunes
-    .logo{
-        position: relative;
-        //right: %;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .register-button{
-        position: relative;
-        top: 25px;
-        left: 30%;
-    }
-}
-@media screen and (min-width: 375px){ //iPhone 6/7/8/X
-    .logo{
-        position: relative;
-        //right: 10%;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-}
-@media screen and (min-width: 414px){
-    .logo{
-        position: relative;
-        //right: 14%;
-        width: 100%;
+    a{
+        display: flex;
+        flex-direction: column;
         margin-left: auto;
         margin-right: auto;
     }
 }
-@media screen and (min-width: 425px){
-    .logo{
-        position: relative;
-        //right: 17%;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-@media screen and (min-width: 768px){
-    .logo{
-        position: relative;
-        //right: 32%;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-@media screen and (min-width: 1024px){
-    .logo{
-        position: relative;
-        width: 450px;
-        margin-right: 36%;
-    }
-    .formu{
-        padding-left: 25%;
-        padding-right: 25%;
-        margin-bottom: 45px;
-    }
-
-    .login-button{
-        position: relative;
-        top: 15px;
-        left: 45%;
-    }
-    .small-text{
-        position: relative;
-        top: 25px;
-        left: 45.6%;
-    }
-    .register-button{
-        position: relative;
-        top: 25px;
-        left: 44.3%;
-    }
-
-}
+@media screen and (max-width: 721px) {
+  .formu {
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 100%;
+  }
 }

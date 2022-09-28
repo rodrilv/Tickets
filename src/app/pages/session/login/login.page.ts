@@ -1,47 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Platform } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { LoginService } from '../../../services/login.service';
-import Swal from 'sweetalert2';
-
+import { Component, OnInit } from "@angular/core";
+import { LoginService } from "../../../services/login.service";
+import { Router } from "@angular/router";
+import { GenericService } from "src/app/services/generic.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: "app-login",
+  templateUrl: "./login.page.html",
+  styleUrls: ["./login.page.scss"],
 })
 export class LoginPage implements OnInit {
-  user = { id: null, nombre: null, apellido_p: null, apellido_m: null, correo: null, password: null, ubicacion: null, telefono: null, rol: null }
-  datos: any;
+  user = {
+    correo: null,
+    password: null,
+  };
   checked: any;
-  constructor(
-    private appAvailability: AppAvailability,
-    private platform: Platform,
-    private router: Router,
-    private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router, private generics: GenericService) {}
 
-  async ngOnInit() {
-    if (window.localStorage.getItem('pass') == null && window.localStorage.getItem('correo') == null) {
-      console.log("vacio");
-    } else {
-      this.user.correo = window.localStorage.getItem('correo');
-      this.user.password = window.localStorage.getItem('pass');
-      await this.loginService.login(this.user.correo, this.user.password);
-      
-      
-      
-    }
-  }
-  login() {
-    this.loginService.login(this.user.correo, this.user.password);
-    if (this.checked) {
-      window.localStorage.setItem('correo', this.user.correo);
-      window.localStorage.setItem('pass', this.user.password);
-      console.log(this.checked);
-    } else {
-      console.log('Remember me Disabled');
-      window.localStorage.clear();
-    }
+  async ngOnInit() {}
+  async login() {
+    this.generics.presentLoading();
+    await this.loginService.login(this.user.correo, this.user.password)
+      ? this.router.navigate(["dashboard"])
+      : Swal.fire({
+          icon: "warning",
+          title: "Error",
+          text: "Tu cuenta aún no ha sido aprobada o los datos introducidos son erróneos.",
+        });
+    this.generics.dismissLoading();
   }
 }
