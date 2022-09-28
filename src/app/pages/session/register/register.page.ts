@@ -1,28 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 import { RegisterService } from '../../../services/register.service';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../../components/ticket_menu/popover/popover.component';
-
+import { SwalService } from 'src/app/services/swal.service';
+import { NewUser } from 'src/app/models/userModels.model';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  user = {
-    nombre: null,
-    apellido_p: null,
-    apellido_m: null,
-    empresa: null,
-    ubicacion: null,
-    correo: null,
-    telefono: null,
-    password: null,
-  }
+  protected user: NewUser = new NewUser();
   constructor(
     private registerService: RegisterService,
     private popov: PopoverController,
+    private swal: SwalService
   ) { }
 
   async presentPopover(ev: any) {
@@ -37,7 +29,10 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
   }
-  register() {
-    this.registerService.register(this.user);
+  async register() {
+    await this.registerService.register(this.user) ?
+    (this.swal.fireSuccess("Tu cuenta será verificada por los administradores."))
+    :
+    (this.swal.fireError("Hubo un error al registrar tu usuario, intenta más tarde o contacta a soporte."))
   }
 }

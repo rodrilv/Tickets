@@ -11,38 +11,38 @@
   <form #forma="ngForm">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input name="nombre" required [(ngModel)]="user.nombre"></ion-input>
+      <ion-input name="nombre" required [(ngModel)]="this.user.nombre"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Apellido Paterno</ion-label>
-      <ion-input name="apellido_p" required [(ngModel)]="user.apellido_p"></ion-input>
+      <ion-input name="apellido_p" required [(ngModel)]="this.user.apellido_paterno"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Apellido Materno</ion-label>
-      <ion-input name="apellido_m" required [(ngModel)]="user.apellido_m"></ion-input>
+      <ion-input name="apellido_m" required [(ngModel)]="this.user.apellido_materno"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Correo</ion-label>
-      <ion-input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo" required [(ngModel)]="user.correo"></ion-input>
+      <ion-input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo" required [(ngModel)]="this.user.correo"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">¿Dónde te ubicas?</ion-label>
-      <ion-input name="ubicacion" required [(ngModel)]="user.ubicacion"></ion-input>
+      <ion-input name="ubicacion" required [(ngModel)]="this.user.ubicacion"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Empresa</ion-label>
-      <ion-input name="empresa" required [(ngModel)]="user.empresa"></ion-input>
+      <ion-input name="empresa" required [(ngModel)]="this.user.empresa"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Numero de Telefono</ion-label>
-      <ion-input name="telefono" type="number" required [(ngModel)]="user.telefono"></ion-input>
+      <ion-input name="telefono" type="number" required [(ngModel)]="this.user.telefono"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required [(ngModel)]="user.password"></ion-input>
+      <ion-input name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required [(ngModel)]="this.user.password"></ion-input>
     </ion-item>
     <ion-item>
-    <ion-button fill="clear" color="danger" (click)="presentPopover()">Acerca de las contraseñas...</ion-button>
+    <ion-button fill="clear" color="danger" (click)="presentPopover($event)">Acerca de las contraseñas...</ion-button>
   </ion-item>
     <ion-button expand="full" class="register-button" [disabled]="!forma.valid" (click)="register()">Solicitar Cuenta</ion-button>
   </form>

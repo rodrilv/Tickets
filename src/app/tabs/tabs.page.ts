@@ -15,7 +15,7 @@ export class TabsPage {
     private menu: MenuController,
     private router: Router,
     private platform: Platform,
-    private loginService: LoginService,
+    protected loginService: LoginService,
     private ticketService: TicketService
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {

@@ -1,51 +1,32 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { LoadingController } from "@ionic/angular";
-import Swal from "sweetalert2";
+import { GenericService } from "./generic.service";
 import { supabase } from "./config/supabase";
+import { INewUser } from "../models/userInterfaces.interface";
 
 @Injectable({
   providedIn: "root",
 })
 export class RegisterService {
-  url = "https://proyectodbdr.000webhostapp.com/proyecto_ionic/register.php";
-  urlA =
-    "https://proyectodbdr.000webhostapp.com/proyecto_ionic/register_agent.php";
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private loadingController: LoadingController
-  ) {}
+  constructor(private router: Router, private generic: GenericService) {}
   loading: any;
 
-  async register(user: any) {
-    this.presentLoading();
-    try {
-      const { data, error } = await supabase.from("cliente").insert(user);
-
-      if (!data) {
-        Swal.fire({
-          icon: "error",
-          title: "Hubo un error",
-          text: `Intenta nuevamente o ponte en contacto con Soporte...`,
-        });
-        this.dismissLoading();
-        //this.router.navigate(["/"]);
-      } else {
-        Swal.fire({
-          icon: "info",
-          title: "¡Gracias por elegir Empresa Example!",
-          text: "¡Tu cuenta será verficada por un administrador!",
-        });
-        this.dismissLoading();
-        this.router.navigate(["/"]);
-      }
-    } catch (error) {}
+  async register(user: INewUser): Promise<boolean>{
+    const { data, error } = await supabase.from("cliente").insert(user);
+    if (!data) {
+      console.log(data, error)
+      return false;
+    } else {
+      return true;
+    }
   }
-
   async register_agent(agent: any) {}
 
+  //------------------------------- OLD URL's, just for reference ---------------------------------------------------------------------
+  /*url = "https://proyectodbdr.000webhostapp.com/proyecto_ionic/register.php";
+  urlA =
+    "https://proyectodbdr.000webhostapp.com/proyecto_ionic/register_agent.php";*/
+  //----------------------------------------------------------------------------------------------------------------------------------
   /*register(user: any) {
     this.presentLoading();
     return this.http.post(`${this.url}`, JSON.stringify(user)).subscribe(datos => {
@@ -88,15 +69,4 @@ export class RegisterService {
     }
     );
   }*/
-
-  async presentLoading() {
-    this.loading = await this.loadingController.create({
-      cssClass: "my-custom-class",
-      message: "Solicitando Cuenta",
-    });
-    await this.loading.present();
-  }
-  async dismissLoading() {
-    this.loading = await this.loadingController.dismiss();
-  }
 }

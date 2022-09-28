@@ -9,7 +9,7 @@ export class LoginService {
   constructor() {
     this.datos = null;
   }
-  async checkIfUser(correo: string, password: string){
+  async checkIfUser(correo: string, password: string): Promise<boolean>{
     const { data, error } = await supabase
     .from('usuarios')
     .select('*')
@@ -23,7 +23,7 @@ export class LoginService {
     }
   }
 
-  async checkIfClient(correo: string, password: string){
+  async checkIfClient(correo: string, password: string): Promise<boolean>{
     const { data, error } = await supabase
     .from('usuarios')
     .select('*')
@@ -36,7 +36,7 @@ export class LoginService {
       return true;
     }
   }
-  async login(correo: string, password: string){
+  async login(correo: string, password: string): Promise<boolean>{
     if(await this.checkIfClient(correo, password)){
       this.status = true;
       return true;
