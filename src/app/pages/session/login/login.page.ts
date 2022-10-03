@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { LoginService } from "../../../services/login.service";
 import { Router } from "@angular/router";
 import { GenericService } from "src/app/services/generic.service";
-import Swal from "sweetalert2";
+import { SwalService } from "src/app/services/swal.service";
 
 @Component({
   selector: "app-login",
@@ -15,7 +15,12 @@ export class LoginPage implements OnInit {
     password: null,
   };
   checked: any;
-  constructor(private loginService: LoginService, private router: Router, private generics: GenericService) {}
+  constructor(
+    private loginService: LoginService, 
+    private router: Router, 
+    private generics: GenericService,
+    private swal: SwalService
+    ) {}
 
   async ngOnInit() {
 
@@ -24,11 +29,7 @@ export class LoginPage implements OnInit {
     this.generics.presentLoading("Iniciando Sesión");
     await this.loginService.login(this.user.correo, this.user.password)
       ? this.router.navigate(["dashboard"])
-      : Swal.fire({
-          icon: "warning",
-          title: "Error",
-          text: "Tu cuenta aún no ha sido aprobada o los datos introducidos son erróneos.",
-        });
+      : this.swal.fireWarning("Tu cuenta aún no ha sido aprobada o los datos introducidos son erróneos.")
     this.generics.dismissLoading();
     console.log(this.loginService.datos);
   }

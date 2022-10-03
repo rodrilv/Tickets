@@ -1,35 +1,37 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { ClientControlService } from '../../../services/client-control.service'
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, NgModule } from "@angular/core";
+import { ClientControlService } from "../../../services/client-control.service";
+import { ModalController } from "@ionic/angular";
+import { GenericService } from "src/app/services/generic.service";
 @Component({
-  selector: 'app-client-incoming',
-  templateUrl: './client-incoming.component.html',
-  styleUrls: ['./client-incoming.component.scss'],
+  selector: "app-client-incoming",
+  templateUrl: "./client-incoming.component.html",
+  styleUrls: ["./client-incoming.component.scss"],
 })
 export class ClientIncomingComponent implements OnInit {
-
-  constructor(private clientControl: ClientControlService, private modal: ModalController) { }
+  constructor(
+    protected clientControl: ClientControlService,
+    protected modal: ModalController,
+    protected generic: GenericService
+  ) {}
 
   ngOnInit() {
-    this.clientControl.getIncoming();
-    console.log(this.clientControl.clients);
+    this.clientControl.getIncomingClients();
   }
 
-  dismissModal() {
-    if (this.modal) {
-      this.modal.dismiss().then(() => { this.modal = null; });
-    }
-}
-  doRefresh(event){
-    setTimeout(()=>{
-      this.clientControl.getIncoming();
+  doRefresh(event) {
+    setTimeout(() => {
+      this.clientControl.getIncomingClients();
       event.target.complete();
-    },1500);
+    }, 2500);
   }
-  aprobar(correo: string){
-    this.clientControl.aprobar(correo);
+  async aproveClient(correo: string) {
+    (this.clientControl.aproveClient(correo))
+      ? this.generic.presentToast("Cliente aprobado")
+      : this.generic.presentToast(
+          "Hubo un error al completar la operación"
+        );
   }
-  eliminar(correo: string){
-    this.clientControl.eliminar(correo);
+  deactivateClient(correo: string) {
+    //this.clientControl.eliminar(correo);
   }
 }

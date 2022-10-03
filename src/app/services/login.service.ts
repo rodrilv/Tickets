@@ -13,7 +13,7 @@ export class LoginService {
     const { data, error } = await supabase
     .from('usuarios')
     .select('*')
-    .match( {correo: correo, password: password} );
+    .match( {correo: correo, password: password, active: true} );
 
     if(data.length === 0){
       return false;
@@ -24,10 +24,10 @@ export class LoginService {
   }
 
   async checkIfClient(correo: string, password: string): Promise<boolean>{
-    const { data, error } = await supabase
-    .from('usuarios')
+    const { data, error }: any = await supabase
+    .from('cliente')
     .select('*')
-    .match( {correo: correo, password: password} );
+    .match( {correo: correo, password: password, aud: true, active: true } );
     //console.log(!data);
     if(data.length === 0){
       return false;

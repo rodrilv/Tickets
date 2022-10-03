@@ -1,19 +1,54 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import Swal from 'sweetalert2';
-
+import { Injectable, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { supabase } from "./config/supabase";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ClientControlService {
-  url="https://proyectodbdr.000webhostapp.com/proyecto_ionic/client_control.php";
+  public clients: any;
+
+  constructor(private http: HttpClient) {}
+
+  async getIncomingClients() {
+    const { data, error }: any = await supabase
+      .from("cliente")
+      .select("*")
+      .match({ aud: false });
+    if (!data) {
+      return false;
+    } else {
+      this.clients = data;
+      return true;
+    }
+  }
+  async aproveClient(correo: string){
+    const { data, error }: any = await supabase
+    .from("cliente")
+    .update( {aud: true}, {returning: "minimal"} )
+    .match( { correo: correo } )
+    if(error){
+      return false
+    }else{
+      return true
+    }
+  }
+  async deactivateClient(correo: string){
+    const { data, error }: any = await supabase
+    .from("cliente")
+    .update({ active: false }, {returning: "minimal"})
+    .match({correo: correo})
+  }
+}
+
+// OLD URL's and code -------------------------------------------------------------------------------------------------
+
+/*url="https://proyectodbdr.000webhostapp.com/proyecto_ionic/client_control.php";
   urlA="https://proyectodbdr.000webhostapp.com/proyecto_ionic/ap_client_control.php";
   urlB="https://proyectodbdr.000webhostapp.com/proyecto_ionic/el_client_control.php";
   urlC="https://proyectodbdr.000webhostapp.com/proyecto_ionic/active_client_control.php";
-  urlD="https://proyectodbdr.000webhostapp.com/proyecto_ionic/deleted_client_control.php";
-  clients= null;
+  urlD="https://proyectodbdr.000webhostapp.com/proyecto_ionic/deleted_client_control.php";*/
 
-  constructor( private http: HttpClient) { }
+/*
 
   getActive(){
     return this.http.get(`${this.urlC}`).subscribe(result => this.clients = result);
@@ -72,5 +107,4 @@ export class ClientControlService {
       }
     })
 
-  }
-}
+  }*/

@@ -13,7 +13,7 @@ export class RegisterService {
 
   async register(user: INewUser): Promise<boolean>{
     const { data, error } = await supabase.from("cliente").insert(user);
-    if (!data) {
+    if (!data  && data.length === 0) {
       console.log(data, error)
       return false;
     } else {
