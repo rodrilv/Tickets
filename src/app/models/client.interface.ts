@@ -1,4 +1,4 @@
-export interface INewUser{
+export interface IClient{
     nombre: string,
     apellido_paterno: string,
     apellido_materno: string,

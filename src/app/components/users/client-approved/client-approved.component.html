@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Cerrar</ion-button>
+      <ion-button (click)="this.generic.dismissModal(this.modal)">Cerrar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,11 +15,11 @@
         <ion-label>
           <h2>{{clnt.nombre}}</h2>
           <h3>{{clnt.empresa}}</h3>
-          <p>{{clnt.correo_electronico}}</p>
+          <p>{{clnt.correo}}</p>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option  class="boton" color="danger" (click)="eliminar(clnt.correo_electronico)">Eliminar</ion-item-option>
+        <ion-item-option  class="boton" color="danger" (click)="deactivateClient(clnt.correo)">Eliminar</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

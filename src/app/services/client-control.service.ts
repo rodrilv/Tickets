@@ -21,22 +21,71 @@ export class ClientControlService {
       return true;
     }
   }
-  async aproveClient(correo: string){
+  async getActiveClients() {
     const { data, error }: any = await supabase
-    .from("cliente")
-    .update( {aud: true}, {returning: "minimal"} )
-    .match( { correo: correo } )
-    if(error){
-      return false
-    }else{
-      return true
+      .from("cliente")
+      .select("*")
+      .match({ active: true, aud: true });
+    if (error) {
+      return false;
+    } else {
+      this.clients = data;
     }
   }
-  async deactivateClient(correo: string){
+  async getUnsubscribedClients() {
     const { data, error }: any = await supabase
-    .from("cliente")
-    .update({ active: false }, {returning: "minimal"})
-    .match({correo: correo})
+      .from("cliente")
+      .select("*")
+      .match({ active: false, aud: true });
+    if (error) {
+      return false;
+    } else {
+      this.clients = data;
+    }
+  }
+  async aproveClient(correo: string) {
+    const { data, error }: any = await supabase
+      .from("cliente")
+      .update({ aud: true }, { returning: "minimal" })
+      .match({ correo: correo });
+    if (error) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  async deactivateClient(correo: string) {
+    const { data, error }: any = await supabase
+      .from("cliente")
+      .update({ active: false }, { returning: "minimal" })
+      .match({ correo: correo });
+    if (error) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  async deleteIncoming(correo: string) {
+    const { data, error }: any = await supabase
+      .from("cliente")
+      .delete({ returning: "minimal" })
+      .match({ correo: correo });
+    if (error) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  async recoverDeactivatedClient(correo: string) {
+    const { data, error }: any = await supabase
+      .from("cliente")
+      .update({ active: true }, { returning: "minimal" })
+      .match({ correo: correo });
+    if (error) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 

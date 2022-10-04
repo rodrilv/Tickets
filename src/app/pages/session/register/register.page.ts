@@ -3,14 +3,14 @@ import { RegisterService } from '../../../services/register.service';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../../components/ticket_menu/popover/popover.component';
 import { SwalService } from 'src/app/services/swal.service';
-import { NewUser } from 'src/app/models/userModels.model';
+import { Client } from 'src/app/models/client.model';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  protected user: NewUser = new NewUser();
+  protected user: Client = new Client();
   constructor(
     private registerService: RegisterService,
     private popov: PopoverController,
@@ -29,8 +29,8 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
   }
-  async register() {
-    await this.registerService.register(this.user) ?
+  async registerClient() {
+    await this.registerService.registerClient(this.user) ?
     (this.swal.fireSuccess("Tu cuenta será verificada por los administradores."))
     :
     (this.swal.fireError("Hubo un error al registrar tu usuario, intenta más tarde o contacta a soporte."))

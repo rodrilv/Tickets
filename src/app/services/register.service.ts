@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { GenericService } from "./generic.service";
 import { supabase } from "./config/supabase";
-import { INewUser } from "../models/userInterfaces.interface";
+import { IClient } from "../models/client.interface";
+import { IAgent } from "../models/agent.interface";
 
 @Injectable({
   providedIn: "root",
@@ -11,16 +12,23 @@ export class RegisterService {
   constructor(private router: Router, private generic: GenericService) {}
   loading: any;
 
-  async register(user: INewUser): Promise<boolean>{
-    const { data, error } = await supabase.from("cliente").insert(user);
-    if (!data  && data.length === 0) {
-      console.log(data, error)
+  async registerClient(user: IClient): Promise<boolean> {
+    const { data, error }: any = await supabase.from("cliente").insert(user);
+    if (!data && data.length === 0) {
       return false;
     } else {
       return true;
     }
   }
-  async register_agent(agent: any) {}
+  async registerAgent(agent: IAgent): Promise<boolean> {
+    const { data, error }: any = await supabase.from("usuarios").insert(agent);
+    if (!data && data.length === 0) {
+      console.error(error);
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   //------------------------------- OLD URL's, just for reference ---------------------------------------------------------------------
   /*url = "https://proyectodbdr.000webhostapp.com/proyecto_ionic/register.php";

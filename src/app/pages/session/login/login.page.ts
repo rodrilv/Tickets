@@ -13,8 +13,10 @@ export class LoginPage implements OnInit {
   user = {
     correo: null,
     password: null,
+    checked: null,
   };
-  checked: any;
+  
+  options: Array<any>;
   constructor(
     private loginService: LoginService, 
     private router: Router, 
@@ -23,14 +25,18 @@ export class LoginPage implements OnInit {
     ) {}
 
   async ngOnInit() {
-
+    
   }
   async login(): Promise<void>{
+    if(this.user.checked){
+      this.options.push(this.user);
+      localStorage.setItem('data', JSON.stringify(this.options));
+    }
     this.generics.presentLoading("Iniciando Sesión");
     await this.loginService.login(this.user.correo, this.user.password)
       ? this.router.navigate(["dashboard"])
-      : this.swal.fireWarning("Tu cuenta aún no ha sido aprobada o los datos introducidos son erróneos.")
+      : this.swal.fireWarning("Hubo un problema con iniciar sesión, si el problema persiste, ponte en contacto con soporte")
     this.generics.dismissLoading();
-    console.log(this.loginService.datos);
+    
   }
 }

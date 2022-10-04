@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientControlService } from '../../../services/client-control.service'
+import { ClientControlService } from '../../../services/client-control.service';
+import { GenericService } from 'src/app/services/generic.service';
 import { ModalController } from '@ionic/angular';
 
 
@@ -10,24 +11,26 @@ import { ModalController } from '@ionic/angular';
 })
 export class ClientNaComponent implements OnInit {
 
-  constructor(private modal: ModalController, private clientControl: ClientControlService) { }
+  constructor(
+    protected modal: ModalController, 
+    protected clientControl: ClientControlService,
+    protected generic: GenericService) { }
 
   ngOnInit() {
-    this.clientControl.getna();
+    this.clientControl.getUnsubscribedClients();
   }
-
-  dismissModal() {
-    if (this.modal) {
-      this.modal.dismiss().then(() => { this.modal = null; });
+  recoverDeactivatedClient(correo: string) {
+    if(this.clientControl.recoverDeactivatedClient(correo)){
+      this.generic.presentToast("Cliente recuperado");
+      this.ngOnInit();
+    }else{
+      this.generic.presentToast("Hubo un error al completar la operación");
     }
-  }
-  recover(correo: string) {
-    this.clientControl.recuperar(correo);
   }
 
   doRefresh(event) {
     setTimeout(() => {
-      this.clientControl.getna();
+      this.clientControl.getUnsubscribedClients();
       event.target.complete();
     }, 1500);
   }

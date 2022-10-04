@@ -11,31 +11,31 @@
   <form #forma="ngForm">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input name="nombre" required [(ngModel)]="agent.nombre"></ion-input>
+      <ion-input name="nombre" required [(ngModel)]="this.agent.nombre"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Apellido Paterno</ion-label>
-      <ion-input name="apellido_p" required [(ngModel)]="agent.apellido_paterno"></ion-input>
+      <ion-input name="apellido_p" required [(ngModel)]="this.agent.apellido_paterno"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Apellido Materno</ion-label>
-      <ion-input name="apellido_m" required [(ngModel)]="agent.apellido_materno"></ion-input>
+      <ion-input name="apellido_m" required [(ngModel)]="this.agent.apellido_materno"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Correo</ion-label>
-      <ion-input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo_electronico" required [(ngModel)]="agent.correo_electronico"></ion-input>
+      <ion-input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo" required [(ngModel)]="this.agent.correo"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Numero de Telefono</ion-label>
-      <ion-input name="telefono" type="number" required [(ngModel)]="agent.telefono"></ion-input>
+      <ion-input name="telefono" type="number" required [(ngModel)]="this.agent.telefono"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required [(ngModel)]="agent.password"></ion-input>
+      <ion-input name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required [(ngModel)]="this.agent.password"></ion-input>
     </ion-item>
     <ion-item>
-    <ion-button fill="clear" color="danger" (click)="presentPopover()">Acerca de las contraseñas...</ion-button>
+    <ion-button fill="clear" color="danger" (click)="presentPopover($event)">Acerca de las contraseñas...</ion-button>
   </ion-item>
-    <ion-button expand="full" class="register-button" [disabled]="!forma.valid" (click)="register()">Registrar</ion-button>
+    <ion-button expand="full" class="register-button" [disabled]="!forma.valid" (click)="registerAgent()">Registrar</ion-button>
   </form>
 </ion-content>

@@ -25,13 +25,20 @@ export class ClientIncomingComponent implements OnInit {
     }, 2500);
   }
   async aproveClient(correo: string) {
-    (this.clientControl.aproveClient(correo))
-      ? this.generic.presentToast("Cliente aprobado")
-      : this.generic.presentToast(
-          "Hubo un error al completar la operación"
-        );
+    if(this.clientControl.aproveClient(correo)){
+      this.generic.presentToast("Cliente entrante aprobado");
+      this.ngOnInit();
+    }else{
+      this.generic.presentToast("Hubo un error al completar la operación");
+    }
   }
-  deactivateClient(correo: string) {
-    //this.clientControl.eliminar(correo);
+  async deleteIncoming(correo: string) {
+    if(this.clientControl.deleteIncoming(correo)){
+      this.generic.presentToast("Cliente entrante eliminado");
+      this.ngOnInit();
+    }else{
+      this.generic.presentToast("Hubo un error al completar la operación");
+    }
+    
   }
 }

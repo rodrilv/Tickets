@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientControlService } from '../../../services/client-control.service'
+import { GenericService } from 'src/app/services/generic.service';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -9,26 +10,28 @@ import { ModalController } from '@ionic/angular';
 })
 export class ClientApprovedComponent implements OnInit {
 
-  constructor(private clientControl: ClientControlService, private modal: ModalController) { }
+  constructor(
+    protected clientControl: ClientControlService, 
+    protected modal: ModalController, 
+    protected generic: GenericService) { }
 
   ngOnInit() {
-    this.clientControl.getActive();
+    this.clientControl.getActiveClients();
   }
-
-  dismissModal() {
-    if (this.modal) {
-      this.modal.dismiss().then(() => { this.modal = null; });
-    }
-  }
+  
   doRefresh(event){
     setTimeout(()=>{
-      this.clientControl.getActive();
+      this.clientControl.getActiveClients();
       event.target.complete();
     },1500);
   }
-  eliminar(correo){
-    this.clientControl.eliminar(correo);
-    this.ngOnInit();
+  deactivateClient(correo: string){
+    if(this.clientControl.deactivateClient(correo)){
+      this.generic.presentToast("Cliente eliminado correctamente");
+      this.ngOnInit();
+    }else{
+      this.generic.presentToast("Hubo un error al completar la operación");
+    }
   }
 
 
