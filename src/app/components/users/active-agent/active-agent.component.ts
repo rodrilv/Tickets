@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AgentControlService } from '../../../services/agent-control.service'
+import { AgentControlService } from '../../../services/agent-control.service';
+import { GenericService } from 'src/app/services/generic.service';
 
 @Component({
   selector: 'app-active-agent',
@@ -9,20 +10,23 @@ import { AgentControlService } from '../../../services/agent-control.service'
 })
 export class ActiveAgentComponent implements OnInit {
 
-  constructor(private modal: ModalController, private agentService: AgentControlService) { }
+  constructor(
+    protected modal: ModalController, 
+    protected agentService: AgentControlService,
+    protected generic: GenericService
+    ) { }
 
   ngOnInit() {
-    this.agentService.getActive();
+    this.agentService.getActiveAgents();
   }
-  eliminar(correo: string){
-    this.agentService.eliminar(correo);
-    this.ngOnInit();
-  }
-
-  dismissModal() {
-    if (this.modal) {
-      this.modal.dismiss().then(() => { this.modal = null; });
+  deactivateAgent(correo: string){
+    if(this.agentService.deactivateAgent(correo)){
+      this.ngOnInit();
+      this.generic.presentToast("Agente desactivado correctamente");
+    }else{
+      this.generic.presentToast("Hubo un error al completar la operación");
     }
+    
   }
   doRefresh(event){
     setTimeout(()=>{

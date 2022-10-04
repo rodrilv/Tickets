@@ -27,8 +27,9 @@ export class ClientApprovedComponent implements OnInit {
   }
   deactivateClient(correo: string){
     if(this.clientControl.deactivateClient(correo)){
-      this.generic.presentToast("Cliente eliminado correctamente");
       this.ngOnInit();
+      this.generic.presentToast("Cliente eliminado correctamente");
+      
     }else{
       this.generic.presentToast("Hubo un error al completar la operación");
     }
